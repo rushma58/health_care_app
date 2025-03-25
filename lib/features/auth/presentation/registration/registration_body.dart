@@ -37,38 +37,41 @@ class _RegistrationBodyState extends State<RegistrationBody> {
       child: Padding(
         padding: const EdgeInsets.all(AppConstants.screenPadding),
         child: Center(
-          child: Form(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const RegistrationText(),
-                AppSpaces.veryLarge,
-                AppSpaces.veryLarge,
-                RegistrationFormSection(
-                  email: _email,
-                  password: _password,
-                  cpassword: _cpassword,
-                  username: _username,
-                ),
-                AppSpaces.medium,
-                CustomCheckbox(
-                  text: 'I agree with the terms and conditions',
-                  initialValue: false,
-                  onChanged: (value) {
-                    // Handle checkbox state change
-                    print('Checkbox is now: $value');
-                  },
-                ),
-                AppSpaces.medium,
-                RegistrationButtonSection(
-                  email: _email,
-                  password: _password,
-                ),
-                AppSpaces.veryLarge,
-                const StackComponent(text: "Or Sign up with"),
-                AppSpaces.large,
-                const NotLoginYet(),
-              ],
+          child: SingleChildScrollView(
+            child: Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const RegistrationText(),
+                  AppSpaces.veryLarge,
+                  AppSpaces.veryLarge,
+                  RegistrationFormSection(
+                    email: _email,
+                    password: _password,
+                    cpassword: _cpassword,
+                    username: _username,
+                  ),
+                  AppSpaces.medium,
+                  CustomCheckbox(
+                    text: 'I agree with the terms and conditions',
+                    initialValue: false,
+                    onChanged: (value) {
+                      // Handle checkbox state change
+                      print('Checkbox is now: $value');
+                    },
+                  ),
+                  AppSpaces.medium,
+                  RegistrationButtonSection(
+                    email: _email,
+                    password: _password,
+                    userName: _username,
+                  ),
+                  AppSpaces.veryLarge,
+                  const StackComponent(text: "Or Sign up with"),
+                  AppSpaces.large,
+                  const NotLoginYet(),
+                ],
+              ),
             ),
           ),
         ),

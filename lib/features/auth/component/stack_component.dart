@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health_care_app/core/constants/app_spaces.dart';
 import 'package:health_care_app/core/constants/text_styles.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_constants.dart';
-import '../../../core/infrastructure/resources/assets.dart';
 
 class StackComponent extends StatelessWidget {
   final String text;

@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care_app/config/routes/app_routes.dart';
-import 'package:health_care_app/core/constants/app_constants.dart';
 import 'package:health_care_app/core/constants/app_spaces.dart';
 import 'package:health_care_app/core/constants/text_styles.dart';
+
 import '../../../core/constants/app_colors.dart';
+import '../../../core/utils/toasts/custom_toasts.dart';
+import '../../auth/service/auth_service.dart';
 import 'components/drawer_tile.dart';
 
 class DashboardDrawer extends StatelessWidget {
@@ -12,6 +14,7 @@ class DashboardDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthService authService = AuthService();
     final size = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Drawer(
@@ -103,16 +106,11 @@ class DashboardDrawer extends StatelessWidget {
                   ),
                   DrawerTile(
                     icon: Icons.people,
-                    title: "Login",
-                    onTap: () {
+                    title: "Logout",
+                    onTap: () async {
+                      final result = await authService.signOut();
                       AutoRouter.of(context).pushNamed(AppRoutes.login);
-                    },
-                  ),
-                  DrawerTile(
-                    icon: Icons.login,
-                    title: "Register",
-                    onTap: () {
-                      AutoRouter.of(context).pushNamed(AppRoutes.register);
+                      CustomToasts.success("Logged Out");
                     },
                   ),
                 ],

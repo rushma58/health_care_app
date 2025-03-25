@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_care_app/core/constants/app_colors.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/constants/app_spaces.dart';
@@ -33,31 +32,33 @@ class _LoginBodyState extends State<LoginBody> {
       child: Padding(
         padding: const EdgeInsets.all(AppConstants.screenPadding),
         child: Center(
-          child: Form(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const LoginText(),
-                AppSpaces.veryLarge,
-                AppSpaces.veryLarge,
-                LoginFormSection(
-                  email: _email,
-                  password: _password,
-                ),
-                AppSpaces.medium,
-                const ForgotPassword(),
-                AppSpaces.medium,
-                LoginButtonSection(
-                  email: _email,
-                  password: _password,
-                ),
-                AppSpaces.veryLarge,
-                const StackComponent(
-                  text: "Or Login With",
-                ),
-                AppSpaces.veryLarge,
-                const NotRegisteredYet(),
-              ],
+          child: SingleChildScrollView(
+            child: Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const LoginText(),
+                  AppSpaces.veryLarge,
+                  AppSpaces.veryLarge,
+                  LoginFormSection(
+                    email: _email,
+                    password: _password,
+                  ),
+                  AppSpaces.medium,
+                  const ForgotPassword(),
+                  AppSpaces.medium,
+                  LoginButtonSection(
+                    email: _email,
+                    password: _password,
+                  ),
+                  AppSpaces.veryLarge,
+                  const StackComponent(
+                    text: "Or Login With",
+                  ),
+                  AppSpaces.veryLarge,
+                  const NotRegisteredYet(),
+                ],
+              ),
             ),
           ),
         ),
