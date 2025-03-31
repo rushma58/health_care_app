@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:health_care_app/core/constants/app_colors.dart';
 import 'package:health_care_app/core/constants/app_constants.dart';
 import 'package:health_care_app/core/constants/text_styles.dart';
+import 'package:health_care_app/features/dashboard/presentation/components/disease_information_screen.dart';
 
 class HomeListTile extends StatelessWidget {
+  final Map<String, dynamic> disease;
   final Widget image;
   final String title;
   const HomeListTile({
     super.key,
-    required this.image,
+    required this.disease,
+    this.image = const SizedBox(
+      width: 10,
+    ),
     required this.title,
   });
 
@@ -16,8 +21,7 @@ class HomeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppConstants.mediumPadding,
-          vertical: AppConstants.gesturePadding),
+          horizontal: 0, vertical: AppConstants.gesturePadding),
       child: Container(
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(
@@ -36,7 +40,16 @@ class HomeListTile extends StatelessWidget {
             style: TextStyles.semi14,
           ),
           trailing: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DiseaseInfoScreen(
+                    diseaseData: disease,
+                  ),
+                ),
+              );
+            },
             icon: const Icon(
               Icons.arrow_forward_ios,
               color: AppColors.mediumGrey,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:health_care_app/core/constants/app_constants.dart';
 import 'package:health_care_app/core/constants/app_spaces.dart';
 
@@ -14,21 +15,56 @@ class DietPlanBody extends StatefulWidget {
 }
 
 class _DietPlanBodyState extends State<DietPlanBody> {
+  String? apiKey;
+  final gender = TextEditingController();
+  final height = TextEditingController();
+  final weight = TextEditingController();
+  final activityLevel = TextEditingController();
+  final foodPreferences = TextEditingController();
+
+  @override
+  void initState() {
+    getAPIKey();
+    super.initState();
+  }
+
+  Future<void> getAPIKey() async {
+    await dotenv.load(fileName: ".env");
+    apiKey = dotenv.env['GEMINI_API_KEY'] ?? 'API key not found';
+    debugPrint('API Key: $apiKey');
+    if (apiKey == "") {
+      debugPrint('API Key is empty!');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(AppConstants.screenPadding),
+        padding: const EdgeInsets.all(AppConstants.screenPadding),
         child: Column(
           children: [
-            UserAvatar(
+            const UserAvatar(
               name: "Sargat Man Singh",
               position: "User",
             ),
             AppSpaces.large,
-            DietPlanFormSection(),
+            DietPlanFormSection(
+              gender: gender,
+              weight: weight,
+              height: height,
+              activityLevel: activityLevel,
+              foodPreferences: foodPreferences,
+            ),
             AppSpaces.large,
-            DietPlanButtonSection(),
+            DietPlanButtonSection(
+              gender: gender,
+              weight: weight,
+              height: height,
+              activityLevel: activityLevel,
+              foodPreferences: foodPreferences,
+              apiKey: apiKey ?? '',
+            ),
           ],
         ),
       ),

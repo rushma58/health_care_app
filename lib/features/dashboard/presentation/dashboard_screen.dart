@@ -36,7 +36,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
         ),
-        body: const DashboardBody(),
+        body: const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: DashboardBody(),
+        ),
       ),
     );
   }

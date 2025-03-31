@@ -6,8 +6,18 @@ import '../../../core/helpers/validation_helper.dart';
 import '../../../core/utils/inputs/custom_input.dart';
 
 class DietPlanFormSection extends StatefulWidget {
+  final TextEditingController gender;
+  final TextEditingController height;
+  final TextEditingController weight;
+  final TextEditingController activityLevel;
+  final TextEditingController foodPreferences;
   const DietPlanFormSection({
     super.key,
+    required this.gender,
+    required this.height,
+    required this.weight,
+    required this.activityLevel,
+    required this.foodPreferences,
   });
 
   @override
