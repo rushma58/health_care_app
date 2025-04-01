@@ -91,7 +91,17 @@ class _LoginButtonState extends State<_LoginButton> {
             CustomToasts.failure("Invalid Credentials");
           }
 
-          context.read<AuthBloc>().add(AuthUserChanged(user));
+          // Get the user data from Firestore including displayName
+          final userData = userDoc.data() as Map<String, dynamic>;
+
+          // Pass both Firebase Auth user and Firestore user data to the bloc
+          context.read<AuthBloc>().add(AuthUserChanged(
+                user,
+                userData:
+                    userData, // Add this parameter to your AuthUserChanged event
+              ));
+
+          // context.read<AuthBloc>().add(AuthUserChanged(user));
           AutoRouter.of(context).pushNamed(AppRoutes.dashboard);
           setState(() {
             isLoading = false;

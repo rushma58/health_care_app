@@ -25,12 +25,6 @@ class DietPlanFormSection extends StatefulWidget {
 }
 
 class _DietPlanFormSectionState extends State<DietPlanFormSection> {
-  final gender = TextEditingController();
-  final height = TextEditingController();
-  final weight = TextEditingController();
-  final activityLevel = TextEditingController();
-  final foodPreferences = TextEditingController();
-
   late List<String> genderList;
   @override
   void initState() {
@@ -54,13 +48,16 @@ class _DietPlanFormSectionState extends State<DietPlanFormSection> {
               )
               .toList(),
           value: genderList.first,
+          onChanged: (p0) {
+            widget.gender.text = p0;
+          },
         ),
         AppSpaces.medium,
         CustomInput(
           label: 'Height',
           hint: 'Enter Height (in cm)',
           isPassword: false,
-          controller: height,
+          controller: widget.height,
           textInputType: TextInputType.text,
           validator: (value) =>
               ValidationHelper.checkEmptyField(value, field: 'height'),
@@ -69,7 +66,7 @@ class _DietPlanFormSectionState extends State<DietPlanFormSection> {
         CustomInput(
           label: 'Weight',
           hint: 'Enter Weight',
-          controller: weight,
+          controller: widget.weight,
           textInputType: TextInputType.text,
           validator: (value) =>
               ValidationHelper.checkEmptyField(value, field: 'weight'),
@@ -78,7 +75,7 @@ class _DietPlanFormSectionState extends State<DietPlanFormSection> {
         CustomInput(
           label: 'Activity Level',
           hint: 'Activity Level',
-          controller: activityLevel,
+          controller: widget.activityLevel,
           textInputType: TextInputType.text,
           validator: (value) =>
               ValidationHelper.checkEmptyField(value, field: 'activity_level'),
@@ -87,7 +84,7 @@ class _DietPlanFormSectionState extends State<DietPlanFormSection> {
         CustomInput(
           label: 'Food Preferences',
           hint: 'Food Preferences',
-          controller: foodPreferences,
+          controller: widget.foodPreferences,
           textInputType: TextInputType.multiline,
           validator: (value) => ValidationHelper.checkEmptyField(value,
               field: 'food_preferences'),

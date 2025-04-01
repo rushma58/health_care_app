@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:health_care_app/core/constants/app_constants.dart';
 import 'package:health_care_app/core/constants/app_spaces.dart';
+import 'package:health_care_app/features/auth/service/auth/auth_bloc.dart';
+import 'package:health_care_app/features/auth/service/auth/auth_state.dart';
 
 import 'component/diet_plan_button_section.dart';
 import 'component/diet_plan_form_section.dart';
@@ -28,6 +31,16 @@ class _DietPlanBodyState extends State<DietPlanBody> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    gender.dispose();
+    height.dispose();
+    weight.dispose();
+    activityLevel.dispose();
+    foodPreferences.dispose();
+    super.dispose();
+  }
+
   Future<void> getAPIKey() async {
     await dotenv.load(fileName: ".env");
     apiKey = dotenv.env['GEMINI_API_KEY'] ?? 'API key not found';
@@ -44,9 +57,12 @@ class _DietPlanBodyState extends State<DietPlanBody> {
         padding: const EdgeInsets.all(AppConstants.screenPadding),
         child: Column(
           children: [
-            const UserAvatar(
-              name: "Sargat Man Singh",
-              position: "User",
+            BlocSelector<AuthBloc, AuthState, AuthState>(
+              selector: (state) => state,
+              builder: (context, state) => UserAvatar(
+                name: state.userData?["displayName"] ?? '',
+                position: state.user?.email ?? '',
+              ),
             ),
             AppSpaces.large,
             DietPlanFormSection(

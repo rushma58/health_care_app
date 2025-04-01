@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,10 +7,10 @@ import 'auth_event.dart';
 import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthState(null)) {
+  AuthBloc() : super(AuthState()) {
     on<AuthUserChanged>((event, emit) async {
       // Update the state with the new user
-      emit(AuthState(event.user));
+      emit(AuthState(user: event.user, userData: event.userData));
 
       // Store the user's UID in SharedPreferences
       final prefs = await SharedPreferences.getInstance();
@@ -28,15 +29,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (userUid != null) {
         // Fetch the user from Firebase (if needed)
         final user = FirebaseAuth.instance.currentUser;
+
         if (user != null && user.uid == userUid) {
-          emit(AuthState(user));
+          final userData = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .get()
+              .then((t) => t.data());
+          emit(AuthState(user: user, userData: userData));
         } else {
           // If the user is not logged in, clear the state
-          emit(AuthState(null));
+          emit(AuthState());
         }
       } else {
         // No user in SharedPreferences
-        emit(AuthState(null));
+        emit(AuthState());
       }
     });
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,18 +31,24 @@ class _SplashBodyState extends State<SplashBody> {
         _user = event;
       });
     });
-    Timer(const Duration(seconds: 1), () => _handleChanges(context));
+    // Timer(const Duration(seconds: 1), () => _handleChanges(context));
   }
 
   Future<void> _checkUserAndRedirect() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final userUid = prefs.getString('user');
+      final FirebaseFirestore db = FirebaseFirestore.instance;
+      final CollectionReference users = db.collection('users');
 
       if (userUid != null) {
         final user = FirebaseAuth.instance.currentUser;
         if (user != null || user?.uid != '') {
-          context.read<AuthBloc>().add(AuthUserChanged(user));
+          final DocumentSnapshot userDoc = await users.doc(user?.uid).get();
+          final userData = userDoc.data() as Map<String, dynamic>;
+          context
+              .read<AuthBloc>()
+              .add(AuthUserChanged(user, userData: userData));
           if (context.mounted) {
             context.router.replaceNamed(AppRoutes.dashboard);
           }
@@ -73,11 +80,11 @@ class _SplashBodyState extends State<SplashBody> {
     );
   }
 
-  void _handleChanges(BuildContext context) {
-    Future.delayed(const Duration(seconds: 1), () {
-      if (context.mounted) {
-        context.router.replaceNamed(AppRoutes.login);
-      }
-    });
-  }
+  // void _handleChanges(BuildContext context) {
+  //   Future.delayed(const Duration(seconds: 1), () {
+  //     if (context.mounted) {
+  //       context.router.replaceNamed(AppRoutes.login);
+  //     }
+  //   });
+  // }
 }
