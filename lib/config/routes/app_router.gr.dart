@@ -45,6 +45,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const DietPlanScreen()),
       );
     },
+    DietResponseRoute.name: (routeData) {
+      final args = routeData.argsAs<DietResponseRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DietResponseScreen(
+          key: args.key,
+          dietResponse: args.dietResponse,
+        ),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -134,6 +144,44 @@ class DietPlanRoute extends PageRouteInfo<void> {
   static const String name = 'DietPlanRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DietResponseScreen]
+class DietResponseRoute extends PageRouteInfo<DietResponseRouteArgs> {
+  DietResponseRoute({
+    Key? key,
+    required Map<String, dynamic> dietResponse,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DietResponseRoute.name,
+          args: DietResponseRouteArgs(
+            key: key,
+            dietResponse: dietResponse,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DietResponseRoute';
+
+  static const PageInfo<DietResponseRouteArgs> page =
+      PageInfo<DietResponseRouteArgs>(name);
+}
+
+class DietResponseRouteArgs {
+  const DietResponseRouteArgs({
+    this.key,
+    required this.dietResponse,
+  });
+
+  final Key? key;
+
+  final Map<String, dynamic> dietResponse;
+
+  @override
+  String toString() {
+    return 'DietResponseRouteArgs{key: $key, dietResponse: $dietResponse}';
+  }
 }
 
 /// generated route for

@@ -1,9 +1,13 @@
-import 'dart:convert';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class DietResponseScreen extends StatefulWidget {
-  const DietResponseScreen({super.key});
+  final Map<String, dynamic> dietResponse;
+  const DietResponseScreen({
+    super.key,
+    required this.dietResponse,
+  });
 
   @override
   _DietResponseScreenState createState() => _DietResponseScreenState();
@@ -23,128 +27,8 @@ class _DietResponseScreenState extends State<DietResponseScreen>
   }
 
   void loadDietData() async {
-    // In a real app, you would load this from an asset or API
-    const String jsonData = '''{
-        "foods_to_have": [
-          {
-            "food": "Broth-based soups",
-            "reason": "Provides hydration and electrolytes, soothing for a sore throat."
-          },
-          {
-            "food": "Ginger",
-            "reason": "Has anti-inflammatory properties, can help soothe a cough."
-          },
-          {
-            "food": "Garlic",
-            "reason": "Natural antibiotic properties, can help fight infection."
-          },
-          {
-            "food": "Honey",
-            "reason": "Soothes a sore throat and cough."
-          },
-          {
-            "food": "Lemon",
-            "reason": "Rich in Vitamin C, boosts immunity."
-          },
-          {
-            "food": "Chicken soup (vegetarian broth alternative available)",
-            "reason": "Easy to digest, provides hydration and nutrients."
-          },
-          {
-            "food": "Fruits (berries, bananas, applesauce)",
-            "reason": "Rich in vitamins and antioxidants, supports the immune system.  Easy to digest when sick."
-          },
-          {
-            "food": "Vegetables (steamed or cooked, easily digestible)",
-            "reason": "Provide essential vitamins and minerals."
-          },
-          {
-            "food": "Plain yogurt",
-            "reason": "Good source of probiotics, aids digestion."
-          },
-          {
-            "food": "Warm liquids (herbal tea, water)",
-            "reason": "Helps to keep hydrated and soothe a sore throat."
-          }
-        ],
-        "foods_to_avoid": [
-          {
-            "food": "Spicy foods",
-            "reason": "Can irritate the throat and worsen cough."
-          },
-          {
-            "food": "Fried foods",
-            "reason": "Difficult to digest, can upset the stomach."
-          },
-          {
-            "food": "Sugary drinks and foods",
-            "reason": "Can weaken the immune system and worsen congestion."
-          },
-          {
-            "food": "Dairy products (if causing congestion)",
-            "reason": "Can increase mucus production in some individuals."
-          },
-          {
-            "food": "Processed foods",
-            "reason": "Lack essential nutrients and can be difficult to digest."
-          },
-          {
-            "food": "Alcohol and caffeine",
-            "reason": "Can dehydrate the body."
-          },
-          {
-            "food": "Heavy, greasy foods",
-            "reason": "Difficult to digest when sick."
-          }
-        ],
-        "weekly_diet": [
-          {
-            "day": "Monday",
-            "breakfast": "Oatmeal with berries and honey",
-            "lunch": "Vegetable soup and whole-wheat toast",
-            "dinner": "Steamed vegetables with brown rice"
-          },
-          {
-            "day": "Tuesday",
-            "breakfast": "Scrambled eggs (if tolerated) with whole-wheat toast",
-            "lunch": "Lentil soup",
-            "dinner": "Chicken soup (vegetarian broth alternative) with quinoa"
-          },
-          {
-            "day": "Wednesday",
-            "breakfast": "Plain yogurt with banana slices",
-            "lunch": "Salad with grilled vegetables and lemon vinaigrette",
-            "dinner": "Baked sweet potato with black beans"
-          },
-          {
-            "day": "Thursday",
-            "breakfast": "Oatmeal with applesauce",
-            "lunch": "Vegetable curry with brown rice",
-            "dinner": "Steamed broccoli and chickpeas"
-          },
-          {
-            "day": "Friday",
-            "breakfast": "Smoothie with fruits and vegetables",
-            "lunch": "Leftover vegetable curry",
-            "dinner": "Pasta with marinara sauce and vegetables"
-          },
-          {
-            "day": "Saturday",
-            "breakfast": "Whole-wheat toast with avocado",
-            "lunch": "Salad with chickpeas and grilled vegetables",
-            "dinner": "Vegetable stir-fry"
-          },
-          {
-            "day": "Sunday",
-            "breakfast": "Pancakes (whole wheat) with fruit",
-            "lunch": "Leftover vegetable stir-fry",
-            "dinner": "Lentil stew"
-          }
-        ]
-      }''';
-
     setState(() {
-      dietData = json.decode(jsonData);
+      dietData = widget.dietResponse;
       isLoading = false;
     });
   }

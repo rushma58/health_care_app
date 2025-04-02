@@ -7,5 +7,7 @@ class AppRoutes {
   static const aiConversation = '/conversation';
   static const booking = '/doctor-appointment';
   static const dietPlan = '/diet-plan';
+  static const dietPlanResponse = '/diet-plan-response';
+  static const dietPlanList = '/diet-plan-list';
   static const callDoctor = '/call-doctor';
 }

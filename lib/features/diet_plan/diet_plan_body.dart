@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -24,6 +26,7 @@ class _DietPlanBodyState extends State<DietPlanBody> {
   final weight = TextEditingController();
   final activityLevel = TextEditingController();
   final foodPreferences = TextEditingController();
+  final disease = TextEditingController();
 
   @override
   void initState() {
@@ -38,13 +41,16 @@ class _DietPlanBodyState extends State<DietPlanBody> {
     weight.dispose();
     activityLevel.dispose();
     foodPreferences.dispose();
+    disease.dispose();
     super.dispose();
   }
 
   Future<void> getAPIKey() async {
     await dotenv.load(fileName: ".env");
-    apiKey = dotenv.env['GEMINI_API_KEY'] ?? 'API key not found';
-    debugPrint('API Key: $apiKey');
+    setState(() {
+      apiKey = dotenv.env['GEMINI_API_KEY'] ?? 'API key not found';
+    });
+    log('API Key: $apiKey');
     if (apiKey == "") {
       debugPrint('API Key is empty!');
     }
@@ -71,6 +77,7 @@ class _DietPlanBodyState extends State<DietPlanBody> {
               height: height,
               activityLevel: activityLevel,
               foodPreferences: foodPreferences,
+              disease: disease,
             ),
             AppSpaces.large,
             DietPlanButtonSection(
@@ -79,6 +86,7 @@ class _DietPlanBodyState extends State<DietPlanBody> {
               height: height,
               activityLevel: activityLevel,
               foodPreferences: foodPreferences,
+              disease: disease,
               apiKey: apiKey ?? '',
             ),
           ],
