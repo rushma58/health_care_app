@@ -21,14 +21,12 @@ class CallDoctorScreen extends StatefulWidget implements AutoRouteWrapper {
 class _CallDoctorScreenState extends State<CallDoctorScreen> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.white,
-        appBar: CustomAppBar(
-          title: 'Call a Doctor',
-        ),
-        body: CallDoctorBody(),
+    return const Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: CustomAppBar(
+        title: 'Call a Doctor',
       ),
+      body: SafeArea(child: CallDoctorBody()),
     );
   }
 }

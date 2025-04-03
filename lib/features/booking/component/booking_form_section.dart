@@ -8,14 +8,12 @@ import '../../../core/utils/inputs/custom_input.dart';
 class BookingFormSection extends StatefulWidget {
   final TextEditingController date;
   final TextEditingController doctor;
-  final TextEditingController location;
   final TextEditingController symptoms;
 
   const BookingFormSection({
     super.key,
     required this.date,
     required this.doctor,
-    required this.location,
     required this.symptoms,
   });
 
@@ -42,15 +40,6 @@ class _BookingFormSectionState extends State<BookingFormSection> {
           textInputType: TextInputType.text,
           validator: (value) =>
               ValidationHelper.checkEmptyField(value, field: 'doctor'),
-        ),
-        AppSpaces.medium,
-        CustomInput(
-          label: 'Location',
-          hint: 'Enter Location',
-          controller: widget.location,
-          textInputType: TextInputType.text,
-          validator: (value) =>
-              ValidationHelper.checkEmptyField(value, field: 'location'),
         ),
         AppSpaces.medium,
         CustomInput(

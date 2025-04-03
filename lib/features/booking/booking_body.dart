@@ -19,14 +19,12 @@ class BookingBody extends StatefulWidget {
 class _BookingBodyState extends State<BookingBody> {
   final _date = TextEditingController();
   final _doctor = TextEditingController();
-  final _location = TextEditingController();
   final _symptoms = TextEditingController();
 
   @override
   void dispose() {
     _date.dispose();
     _doctor.dispose();
-    _location.dispose();
     _symptoms.dispose();
     super.dispose();
   }
@@ -53,11 +51,14 @@ class _BookingBodyState extends State<BookingBody> {
               BookingFormSection(
                 doctor: _doctor,
                 date: _date,
-                location: _location,
                 symptoms: _symptoms,
               ),
               AppSpaces.medium,
-              const BookingButtonSection(),
+              BookingButtonSection(
+                doctor: _doctor,
+                date: _date,
+                symptoms: _symptoms,
+              ),
             ],
           ),
         ),

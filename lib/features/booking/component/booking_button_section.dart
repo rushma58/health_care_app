@@ -6,8 +6,14 @@ import '../../../../../../core/constants/app_spaces.dart';
 import '../../../../../../core/utils/buttons/expanded_filled_button.dart';
 
 class BookingButtonSection extends StatelessWidget {
+  final TextEditingController date;
+  final TextEditingController doctor;
+  final TextEditingController symptoms;
   const BookingButtonSection({
     super.key,
+    required this.date,
+    required this.doctor,
+    required this.symptoms,
   });
 
   @override

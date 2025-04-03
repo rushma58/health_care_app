@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:health_care_app/core/constants/app_colors.dart';
 
 import '../../../../../../core/utils/gesture/custom_gesture_detector.dart';
-
 import '../../core/utils/app_bars/custom_app_bar.dart';
 import 'booking_body.dart';
 
@@ -24,16 +23,14 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return const CustomGestureDetector(
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: AppColors.white,
-          resizeToAvoidBottomInset: true,
-          appBar: CustomAppBar(
-            title: 'Doctor Appointment',
-          ),
-          body: SafeArea(
-            child: BookingBody(),
-          ),
+      child: Scaffold(
+        backgroundColor: AppColors.white,
+        resizeToAvoidBottomInset: true,
+        appBar: CustomAppBar(
+          title: 'Doctor Appointment',
+        ),
+        body: SafeArea(
+          child: BookingBody(),
         ),
       ),
     );
