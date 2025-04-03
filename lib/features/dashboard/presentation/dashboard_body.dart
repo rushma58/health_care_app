@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care_app/core/constants/app_spaces.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/material_symbols.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/text_styles.dart';
@@ -62,7 +62,6 @@ class _DashboardBodyState extends State<DashboardBody> {
               fillColor: AppColors.textFieldBg,
             ),
             onChanged: (value) {
-              log(">>>>>>>>>>>>>>>>>>>>$value");
               setState(() {
                 if (value.isEmpty) {
                   filteredDiseaseList = diseaseList;
@@ -78,12 +77,16 @@ class _DashboardBodyState extends State<DashboardBody> {
             },
           ),
           AppSpaces.large,
-          ListView.builder(
+          ListView.separated(
             itemCount: filteredDiseaseList.length,
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
+            separatorBuilder: (context, index) {
+              return AppSpaces.small;
+            },
             itemBuilder: (context, index) {
               return HomeListTile(
+                image: const Iconify(MaterialSymbols.health_and_safety_outline),
                 title: filteredDiseaseList[index]['name'],
                 disease: filteredDiseaseList[index],
               );
