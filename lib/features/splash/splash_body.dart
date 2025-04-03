@@ -25,16 +25,16 @@ class _SplashBodyState extends State<SplashBody> {
   @override
   void initState() {
     super.initState();
-    _checkUserAndRedirect();
-    _auth.authStateChanges().listen((event) {
-      setState(() {
-        _user = event;
-      });
-    });
-    // Timer(const Duration(seconds: 1), () => _handleChanges(context));
+    _checkUserAndRedirect(context);
+    // _auth.authStateChanges().listen((event) {
+    //   setState(() {
+    //     _user = event;
+    //   });
+    // });
+    Timer(const Duration(seconds: 1), () => _handleChanges(context));
   }
 
-  Future<void> _checkUserAndRedirect() async {
+  Future<void> _checkUserAndRedirect(BuildContext context) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final userUid = prefs.getString('user');
@@ -46,10 +46,11 @@ class _SplashBodyState extends State<SplashBody> {
         if (user != null || user?.uid != '') {
           final DocumentSnapshot userDoc = await users.doc(user?.uid).get();
           final userData = userDoc.data() as Map<String, dynamic>;
-          context
-              .read<AuthBloc>()
-              .add(AuthUserChanged(user, userData: userData));
+
           if (context.mounted) {
+            context
+                .read<AuthBloc>()
+                .add(AuthUserChanged(user, userData: userData));
             context.router.replaceNamed(AppRoutes.dashboard);
           }
         }
@@ -80,11 +81,11 @@ class _SplashBodyState extends State<SplashBody> {
     );
   }
 
-  // void _handleChanges(BuildContext context) {
-  //   Future.delayed(const Duration(seconds: 1), () {
-  //     if (context.mounted) {
-  //       context.router.replaceNamed(AppRoutes.login);
-  //     }
-  //   });
-  // }
+  void _handleChanges(BuildContext context) {
+    Future.delayed(const Duration(seconds: 1), () {
+      if (context.mounted) {
+        context.router.replaceNamed(AppRoutes.login);
+      }
+    });
+  }
 }

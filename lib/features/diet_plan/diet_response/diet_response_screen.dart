@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/text_styles.dart';
+
 @RoutePage()
 class DietResponseScreen extends StatefulWidget {
   final Map<String, dynamic> dietResponse;
@@ -81,7 +83,7 @@ class _DietResponseScreenState extends State<DietResponseScreen>
           child: ExpansionTile(
             title: Text(
               day['day'],
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyles.bold18,
             ),
             children: [
               _buildMealTile('Breakfast', day['breakfast'], Icons.wb_sunny),
@@ -99,11 +101,16 @@ class _DietResponseScreenState extends State<DietResponseScreen>
   Widget _buildMealTile(String mealType, String meal, IconData icon) {
     return ListTile(
       leading: Icon(icon, color: Colors.green),
-      title:
-          Text(mealType, style: const TextStyle(fontWeight: FontWeight.bold)),
+      title: Text(
+        mealType,
+        style: TextStyles.bold16,
+      ),
       subtitle: Padding(
         padding: const EdgeInsets.only(top: 4.0),
-        child: Text(meal),
+        child: Text(
+          meal,
+          style: TextStyles.regular14,
+        ),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
     );
@@ -126,15 +133,12 @@ class _DietResponseScreenState extends State<DietResponseScreen>
               children: [
                 Text(
                   food['food'],
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                  style: TextStyles.bold18,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   food['reason'],
-                  style: const TextStyle(fontSize: 14),
+                  style: TextStyles.regular14,
                 ),
               ],
             ),

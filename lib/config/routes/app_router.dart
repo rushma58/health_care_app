@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care_app/features/auth/presentation/registration/registration_screen.dart';
+import 'package:health_care_app/features/diet_plan/diet_plan_list/diet_plan_list_screen.dart';
 
 import '../../features/ai_conversation/ai_conversation_screen.dart';
 import '../../features/auth/presentation/login/ui/login_screen.dart';
@@ -68,6 +69,10 @@ class AppRouter extends _$AppRouter {
     _autoRoute(
       path: AppRoutes.dietPlanResponse,
       page: DietResponseRoute.page,
+    ),
+    _autoRoute(
+      path: AppRoutes.dietPlanList,
+      page: DietPlanListRoute.page,
     ),
   ];
 

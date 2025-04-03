@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/constants/app_spaces.dart';
 import '../../../component/background.dart';
-import '../../../component/stack_component.dart';
 import 'components/login_button_section.dart';
 import 'components/login_form_section.dart';
 import 'components/login_text.dart';
@@ -51,10 +50,10 @@ class _LoginBodyState extends State<LoginBody> {
                     email: _email,
                     password: _password,
                   ),
-                  AppSpaces.veryLarge,
-                  const StackComponent(
-                    text: "Or Login With",
-                  ),
+                  // AppSpaces.veryLarge,
+                  // const StackComponent(
+                  //   text: "Or Login With",
+                  // ),
                   AppSpaces.veryLarge,
                   const NotRegisteredYet(),
                 ],

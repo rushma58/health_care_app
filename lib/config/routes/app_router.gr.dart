@@ -39,6 +39,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const DashboardScreen()),
       );
     },
+    DietPlanListRoute.name: (routeData) {
+      final args = routeData.argsAs<DietPlanListRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DietPlanListScreen(
+          key: args.key,
+          dietList: args.dietList,
+        ),
+      );
+    },
     DietPlanRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -130,6 +140,44 @@ class DashboardRoute extends PageRouteInfo<void> {
   static const String name = 'DashboardRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DietPlanListScreen]
+class DietPlanListRoute extends PageRouteInfo<DietPlanListRouteArgs> {
+  DietPlanListRoute({
+    Key? key,
+    required List<Map<String, dynamic>> dietList,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DietPlanListRoute.name,
+          args: DietPlanListRouteArgs(
+            key: key,
+            dietList: dietList,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DietPlanListRoute';
+
+  static const PageInfo<DietPlanListRouteArgs> page =
+      PageInfo<DietPlanListRouteArgs>(name);
+}
+
+class DietPlanListRouteArgs {
+  const DietPlanListRouteArgs({
+    this.key,
+    required this.dietList,
+  });
+
+  final Key? key;
+
+  final List<Map<String, dynamic>> dietList;
+
+  @override
+  String toString() {
+    return 'DietPlanListRouteArgs{key: $key, dietList: $dietList}';
+  }
 }
 
 /// generated route for

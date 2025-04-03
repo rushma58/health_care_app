@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_care_app/features/auth/component/stack_component.dart';
 import 'package:health_care_app/features/auth/presentation/registration/ui/registration_form_section.dart';
 import 'package:health_care_app/features/auth/presentation/registration/ui/registration_text.dart';
 
@@ -66,8 +65,8 @@ class _RegistrationBodyState extends State<RegistrationBody> {
                     password: _password,
                     userName: _username,
                   ),
-                  AppSpaces.veryLarge,
-                  const StackComponent(text: "Or Sign up with"),
+                  // AppSpaces.veryLarge,
+                  // const StackComponent(text: "Or Sign up with"),
                   AppSpaces.large,
                   const NotLoginYet(),
                 ],
