@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care_app/core/constants/app_colors.dart';
 import 'package:health_care_app/core/utils/toasts/custom_toasts.dart';
@@ -5,7 +9,7 @@ import 'package:health_care_app/core/utils/toasts/custom_toasts.dart';
 import '../../../../../../core/constants/app_spaces.dart';
 import '../../../../../../core/utils/buttons/expanded_filled_button.dart';
 
-class BookingButtonSection extends StatelessWidget {
+class BookingButtonSection extends StatefulWidget {
   final TextEditingController date;
   final TextEditingController doctor;
   final TextEditingController symptoms;
@@ -17,48 +21,61 @@ class BookingButtonSection extends StatelessWidget {
   });
 
   @override
+  State<BookingButtonSection> createState() => _BookingButtonSectionState();
+}
+
+class _BookingButtonSectionState extends State<BookingButtonSection> {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         AppSpaces.veryLarge,
-        _BookingButtom(),
+        ExpandedFilledButton(
+          isLoading: false,
+          backgroundColor: AppColors.primary,
+          title: 'Book An Appointment',
+          onTap: () {
+            if (Form.of(context).validate()) {
+              final appointmentData = {
+                'doctor': widget.doctor.text,
+                'date': widget.date.text,
+                'symptoms': widget.symptoms.text,
+              };
+              _storeData(appointmentData);
+            }
+
+            CustomToasts.success("Thank You");
+          },
+        ),
       ],
     );
   }
-}
 
-// class _ForgotPasswordComponent extends StatelessWidget {
-//   const _ForgotPasswordComponent();
+  Future<void> _storeData(Map<String, dynamic> appointment) async {
+    try {
+      // Get current user
+      final User? currentUser = auth.currentUser;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Align(
-//       alignment: Alignment.centerRight,
-//       child: TappableText(
-//         text: 'Forgot Password?',
-//         style: TextStyles.regular14.copyWith(
-//           color: AppColors.label,
-//         ),
-//         onTap: () => AutoRouter.of(context).pushNamed(AppRoutes.forgotPassword),
-//       ),
-//     );
-//   }
-// }
+      if (currentUser != null) {
+        // Add timestamp and user info to the data
+        appointment['timestamp'] = FieldValue.serverTimestamp();
+        appointment['userId'] = currentUser.uid;
 
-class _BookingButtom extends StatelessWidget {
-  const _BookingButtom();
+        // Store in Firestore under user's collection
+        await firestore
+            .collection('users')
+            .doc(currentUser.uid)
+            .collection('appointments')
+            .add(appointment);
 
-  @override
-  Widget build(BuildContext context) {
-    return ExpandedFilledButton(
-      isLoading: false,
-      backgroundColor: AppColors.primary,
-      title: 'Book An Appointment',
-      onTap: () {
-        // AutoRouter.of(context).pushNamed(AppRoutes.dashboard);
-
-        CustomToasts.success("Thank You");
-      },
-    );
+        log('Appointment stored successfully in Firebase');
+      } else {
+        log('Error: No user is currently signed in');
+      }
+    } catch (e) {
+      log('Error storing Appointment in Firebase: $e');
+    }
   }
 }
