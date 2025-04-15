@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care_app/core/constants/app_colors.dart';
 import 'package:health_care_app/core/constants/text_styles.dart';
+
+import '../../../../config/routes/app_routes.dart';
 
 class DiseaseInfoScreen extends StatefulWidget {
   final Map<String, dynamic> diseaseData;
@@ -110,6 +113,8 @@ class _DiseaseInfoScreenState extends State<DiseaseInfoScreen> {
                         //     builder: (context) => const BookAppointmentScreen(),
                         //   ),
                         // );
+
+                        AutoRouter.of(context).pushNamed(AppRoutes.booking);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red.shade700,

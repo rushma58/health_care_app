@@ -7,6 +7,7 @@ import 'package:iconify_flutter/icons/material_symbols.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/text_styles.dart';
 import 'components/home_list_tile.dart';
+import 'components/upcoming_appointments_section.dart';
 
 class DashboardBody extends StatefulWidget {
   const DashboardBody({super.key});
@@ -51,6 +52,8 @@ class _DashboardBodyState extends State<DashboardBody> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          const UpcomingAppointmentsSection(),
+          AppSpaces.large,
           TextFormField(
             decoration: InputDecoration(
               hintText: "Search",

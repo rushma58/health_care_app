@@ -16,6 +16,8 @@ class AppColors {
 
   static const success = Colors.green;
   static const danger = Color(0xffF51D2C);
+  static const warning = Color.fromARGB(255, 255, 238, 0);
+  static const orange = Colors.orange;
 
   static const black = Colors.black;
   static const white = Colors.white;
