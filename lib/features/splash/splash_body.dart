@@ -51,7 +51,12 @@ class _SplashBodyState extends State<SplashBody> {
             context
                 .read<AuthBloc>()
                 .add(AuthUserChanged(user, userData: userData));
-            context.router.replaceNamed(AppRoutes.dashboard);
+
+            if (userData['email'] == 'admin@test.com') {
+              context.router.replaceNamed(AppRoutes.admin);
+            } else {
+              context.router.replaceNamed(AppRoutes.dashboard);
+            }
           }
         }
         if (user == null) {
