@@ -127,7 +127,7 @@ class _RegistrationButtonState extends State<_RegistrationButton> {
           }
 
           context.read<AuthBloc>().add(AuthUserChanged(user));
-          AutoRouter.of(context).pushNamed(AppRoutes.dashboard);
+          AutoRouter.of(context).pushNamed(AppRoutes.login);
           setState(() {
             isLoading = false;
           });

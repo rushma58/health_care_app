@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care_app/config/routes/app_router.dart';
 import 'package:health_care_app/config/routes/app_routes.dart';
 import 'package:health_care_app/core/constants/app_spaces.dart';
 import 'package:health_care_app/core/constants/text_styles.dart';
@@ -116,7 +117,8 @@ class DashboardDrawer extends StatelessWidget {
                     title: "Logout",
                     onTap: () async {
                       final result = await authService.signOut();
-                      AutoRouter.of(context).pushNamed(AppRoutes.login);
+
+                      AutoRouter.of(context).replaceAll([const LoginRoute()]);
                       CustomToasts.success("Logged Out");
                     },
                   ),
