@@ -205,15 +205,15 @@ User's question: $userMessage
               ),
               child: Row(
                 children: [
-                  IconButton(
-                    onPressed: _pickImage,
-                    icon: const Iconify(
-                      MaterialSymbols.image,
-                      color: AppColors.primary,
-                      size: AppConstants.mediumIconSize,
-                    ),
-                  ),
-                  AppSpaces.medium,
+                  // IconButton(
+                  //   onPressed: _pickImage,
+                  //   icon: const Iconify(
+                  //     MaterialSymbols.image,
+                  //     color: AppColors.primary,
+                  //     size: AppConstants.mediumIconSize,
+                  //   ),
+                  // ),
+                  // AppSpaces.medium,
                   Expanded(
                     child: CustomInput(
                       controller: _messageController,
