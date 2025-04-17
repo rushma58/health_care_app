@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:health_care_app/core/constants/app_colors.dart';
 import 'package:health_care_app/core/constants/app_constants.dart';
@@ -70,6 +72,10 @@ class CallDoctorTile extends StatelessWidget {
       if (await canLaunchUrl(phoneUri)) {
         await launchUrl(phoneUri);
         CustomToasts.success("THIS IS A DUMMY DATA");
+      } else {
+        // This will happen on emulators or devices without phone capabilities
+        CustomToasts.failure("No app available to handle phone calls");
+        log("Cannot launch phone app - likely an emulator");
       }
     } catch (e) {
       debugPrint('Error launching phone call: $e');
